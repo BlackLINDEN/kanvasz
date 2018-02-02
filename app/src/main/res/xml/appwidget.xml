@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent">
+<appwidget-provider
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:minWidth="146dp"
+    android:updatePeriodMillis="0"
+    android:minHeight="146dp"
+    android:initialLayout="@layout/activity_main">
+</appwidget-provider>
+
+</TableLayout>
