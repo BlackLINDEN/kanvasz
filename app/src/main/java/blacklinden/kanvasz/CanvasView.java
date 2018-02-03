@@ -76,7 +76,8 @@ public class CanvasView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
 
-        teknős(canvas,Lrendszer("F",6),20);
+        teknős(canvas,Lrendszer("F",3),20);
+
         super.onDraw(canvas);
 
 
@@ -89,11 +90,11 @@ public class CanvasView extends View {
             if (consts.contains(Character.toString(ch)))
                 f.append(ch);
 
-            else if(ch=='X')
-                f.append("fXXr");
+            else if(ch=='B')
+                f.append("BBX");
 
             else if(ch=='F')
-                f.append("F[F[+X][-X]F");
+                f.append("FF");
 
             else if(ch=='0')
                 f.append("F[]");
@@ -124,7 +125,7 @@ public class CanvasView extends View {
 
 
             } else if (ch == 'B') {
-                t.előreRajz(i,c,mPaint);
+                t.előre(-i,c);
             }
 
             else if (ch == 'f') {

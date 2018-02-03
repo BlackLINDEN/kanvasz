@@ -63,25 +63,9 @@ public class Teknős  {
 
         //System.out.println(sz+" stack t"+stack.peek().t+" x"+(x-stack.peek().x)+" y"+(stack.peek().y));
     }
-    public void betöltés(Canvas c, boolean eredetiSzög){
-        sz++;
-       // c.restore();
-        //c.translate((float)(x-stack.peek().x),((float)y-stack.peek().y));
-        x = stack.peek().x;
-        y = stack.peek().y;
-
-        c.rotate(stack.peek().t,stack.peek().x,stack.peek().y);
 
 
 
-    }
-
-    public void pattintás(Canvas c){
-
-        stack.pop();
-
-
-    }
     public void SaveImage(Bitmap finalBitmap) {
 
         String root = Environment.getExternalStorageDirectory().toString();
