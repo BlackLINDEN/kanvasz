@@ -8,14 +8,20 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.SeekBar;
 import android.widget.TextView;
+
+import blacklinden.kanvasz.kor.Fény;
 
 public class MainActivity extends Activity {
 
     private CanvasView customCanvas;
     private TextView tv;
-    private Button gmb;
-    private ImageButton forw;
+    private SeekBar seekBar;
+
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,31 +29,34 @@ public class MainActivity extends Activity {
         //this.startActivity( new Intent(this,min3d3d.class));
         setContentView(R.layout.activity_main);
 
-        tv=(TextView)findViewById(R.id.txt);
-        gmb=(Button)findViewById(R.id.gmb);
-        customCanvas = (CanvasView) findViewById(R.id.signature_canvas);
-        gmb.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-            Intent i = new Intent(getBaseContext(),Main2Activity.class);
-            startActivity(i);
-            }
-        });
-        forw=(ImageButton)findViewById(R.id.Forward);
-        forw.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View view) {
+        tv= findViewById(R.id.txt);
+        seekBar = findViewById(R.id.sb);
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+                                               @Override
+                                               public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                                                   Fény.setIrány(seekBar.getProgress());
+                                               }
 
-                                    }
-                                });
+                                               @Override
+                                               public void onStartTrackingTouch(SeekBar seekBar) {
+
+                                               }
+
+                                               @Override
+                                               public void onStopTrackingTouch(SeekBar seekBar) {
+
+                                               }
+                                           });
+        customCanvas = findViewById(R.id.signature_canvas);
 
 
                 //customCanvas.setLayoutParams(new FrameLayout.LayoutParams(200, 200));
     }
 
     public void clearCanvas(View v) {
-        customCanvas.clearCanvas();
+        customCanvas.oo.run();
     }
+    public void cl(View v) { customCanvas.nulláz();}
 
 
 

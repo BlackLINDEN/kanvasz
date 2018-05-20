@@ -12,55 +12,79 @@ package blacklinden.kanvasz;
         import android.graphics.Color;
         import android.graphics.Paint;
         import android.graphics.Path;
-        import android.graphics.drawable.Drawable;
-        import android.graphics.drawable.VectorDrawable;
+
+        import android.os.Handler;
+        import android.os.Looper;
         import android.util.AttributeSet;
+
         import android.view.MotionEvent;
         import android.view.View;
 
-        import java.util.Stack;
+        import java.util.ArrayList;
+        import java.util.Collections;
+        import java.util.Iterator;
+        import java.util.Objects;
+
+        import blacklinden.kanvasz.nov.A;
+        import blacklinden.kanvasz.nov.Av;
+        import blacklinden.kanvasz.nov.F;
+        import blacklinden.kanvasz.nov.L;
+        import blacklinden.kanvasz.nov.M;
+        import blacklinden.kanvasz.nov.Növény;
+        import blacklinden.kanvasz.nov.T;
+        import blacklinden.kanvasz.nov.V;
+        import blacklinden.kanvasz.nov.X;
+
 
 public class CanvasView extends View {
 
 
     private Bitmap mBitmap;
-    private Canvas mCanvas;
+
     private Path mPath;
     Context context;
     private Paint mPaint;
     private float mX, mY;
     private static final float TOLERANCE = 5;
-    float theta = 45f;
+    float theta = 22.5f;
     float delta_theta=0f;
+    public static int ism=1;
 
 
-    String consts = "+-[]¤fr€$B";
-    String levél="fFB€FFBB€FFFBBB€FFFFFBBBBB€FFFBBB€FFBBr";
 
 
+    String levél="f[[+++B][---B][++BB][--BB]BBB]r";
+
+    ArrayList<Növény> al = new ArrayList<>();
 
 
     public CanvasView(Context c, AttributeSet attrs) {
         super(c, attrs);
         context = c;
 
-
+        //oo.run();
+        F ff = new F();
+        al.add(ff);
 
         // we set a new Path
         mPath = new Path();
+
 
 
         // and we set a new Paint with the desired attributes
         mPaint = new Paint();
         mPaint.setAntiAlias(true);
         mPaint.setColor(Color.BLACK);
-        mPaint.setStyle(Paint.Style.STROKE);
-        mPaint.setStrokeJoin(Paint.Join.ROUND);
-        mPaint.setStrokeWidth(4f);
+        mPaint.setStyle(Paint.Style.FILL_AND_STROKE);
+        mPaint.setStrokeJoin(Paint.Join.BEVEL);
+        mPaint.setStrokeWidth(50f);
 
 
 
     }
+
+
+
 
     // override onSizeChanged
     @Override
@@ -69,187 +93,268 @@ public class CanvasView extends View {
 
         // your Canvas will draw onto the defined Bitmap
         mBitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
-        mCanvas = new Canvas(mBitmap);
+        //mCanvas = new Canvas(mBitmap);
+
     }
 
     // Lrendszer("FFFF[[+FFF-€€X]-FF[FF-X]-F-X¤]FFF[[+FF-€X]-F-$X¤]F€€FF[-X]BB-FF-$X",1)
     @Override
-    protected void onDraw(Canvas canvas) {
-
-        teknős(canvas,Lrendszer("F",3),20);
-
+    protected void onDraw(final Canvas canvas) {
         super.onDraw(canvas);
 
+       // teknős(canvas,r("XFF",ism), 100);
+        T(canvas,al);
+        //teknős(canvas, Lrendszer("X", 6), 5);
+
+
+    }
+    Handler handler = new Handler(Looper.getMainLooper());
+    Runnable oo = new Runnable() {
+        @Override
+        public void run() {
+
+            invalidate();
+            if(ism==1000) {
+                handler.removeCallbacks(this);
+
+            }
+            else {
+                ism();
+                A(al,ism);
+                handler.postDelayed(this, 100);
+            }
+        }
+    };
+    private void ism(){
+        ism++;
 
     }
 
-    private String Lrendszer(String axióma,int ism){
-        ism--;
-        StringBuilder f= new StringBuilder();
-        for(char ch:axióma.toCharArray()) {
-            if (consts.contains(Character.toString(ch)))
-                f.append(ch);
+    private ArrayList<Növény> A(ArrayList<Növény> aa, int sm){
+        ArrayList<Növény> a = new ArrayList<>();
 
-            else if(ch=='B')
-                f.append("BBX");
+        if(ism<800){
+        for(Növény x:aa){
+        x.élet();
+        if(Objects.equals(x.n, "F")&&x.fejl()==50){
+            a.add(x);
+            a.add(new A(x.szint()));
+        }
+        else if(Objects.equals(x.n,"A")&&x.fejl()<500){
 
-            else if(ch=='F')
-                f.append("FF");
-
-            else if(ch=='0')
-                f.append("F[]");
-
-
-
-        }System.out.println(f.toString());
-
-        if(ism==0)
-            return f.toString();
-        else
-            return Lrendszer(f.toString(),ism);
-    }
-
-    public void teknős(Canvas c,String s,int i){
-
-        Teknős t = new Teknős(c.getWidth()/2,c.getHeight()-200,90);
-
-        Drawable d =  getResources().getDrawable(R.drawable.w);
-        d.setBounds((int)t.x, (int)t.y, 1, 1);
+            //System.out.println("szint: "+x.szint());
+            a.add(new M());
+            a.add(new X(true,x.szint()));
+            a.add(new L(true,x.szint()));
+            a.add(new T());
+            a.add(new M());
+            a.add(new T());
+            a.add(new M());
+            a.add(new X(false,x.szint()));
+            a.add(new L(false,x.szint()));
+            a.add(new T());
+            a.add(new F(x.szint()));
 
 
-        for (char ch : s.toCharArray()) {
+        }else if(Objects.equals(x.n,"X")&&x.szint()==5){
+           a.add(new F(x.szint()));
+            /*a.add(new X(true,x.szint()/2));
+            a.add(new A(1));*/
 
-            if (ch == 'F'||ch=='X') {
-                t.előreRajz(-i,c,mPaint);
+        }else if(Objects.equals(x.n,"X")&&(int)x.fejl()==300){
 
-
-
-            } else if (ch == 'B') {
-                t.előre(-i,c);
-            }
-
-            else if (ch == 'f') {
-                mPaint.setColor(Color.GREEN);
-                mPaint.setStrokeWidth(8f);
-                mPaint.setStyle(Paint.Style.FILL_AND_STROKE);
-                mPaint.setStrokeCap(Paint.Cap.ROUND);
-            }
-
-            else if (ch == 'r') {
-                mPaint.setColor(Color.BLACK);
-                mPaint.setStrokeWidth(4f);
-                mPaint.setStyle(Paint.Style.STROKE);
-            }
-
-            else if (ch == '¤') {
-                d.draw(c);
-            }
-
-
-            else if (ch == '+') {
-
-                c.rotate(-theta,(float)t.x,(float)t.y);
-                delta_theta-=theta;
-
-
-            }
-
-            else if (ch == '$') {
-                c.rotate(25,(float)t.x,(float)t.y);
-
-            }
-
-            else if (ch == '€') {
-                c.rotate(-25,(float)t.x,(float)t.y);
-
-            }
-
-            else if (ch == '-') {
-
-                c.rotate(theta,(float)t.x,
-                        (float)t.y);
-                delta_theta+=theta;
-
-            }
-            else if (ch == '['){
-                //c.save(Canvas.ALL_SAVE_FLAG);//
-                t.mentés(c,(int)t.x,(int)t.y,(int)delta_theta);
-                delta_theta=90;
-
-            }
-
-            else if( ch == ']'){
-               //c.restoreToCount(c.getSaveCount());
-               t.betöltés(c);
-
-            }
-
-        }//c.drawPath(mPath, mPaint);
-    }
-
-
-    // when ACTION_DOWN start touch according to the x,y values
-    private void startTouch(float x, float y) {
-        mPath.moveTo(x, y);
-        mX = x;
-
-        mY = y;
-    }
-
-    // when ACTION_MOVE move touch according to the x,y values
-    private void moveTouch(float x, float y) {
-        float dx = Math.abs(x - mX);
-        float dy = Math.abs(y - mY);
-        if (dx >= TOLERANCE || dy >= TOLERANCE) {
-            mPath.quadTo(mX, mY, (x + mX) / 2, (y + mY) / 2);
-            mX = x;
-            mY = y;
-
-            //theta=mY;
+            a.add(new X(x.szög()<0,301,x.hossz()/2,x.szög(),3));
+            a.add(new L(x.szög()<0,4));
+            a.add(new X(x.szög()<0,301,x.hossz()/2,x.szög(),3));
         }
 
+        else {
+            a.add(x);
+        }
+        } al.clear();
+            al.addAll(a);
+        }else {
+            for (int i = aa.size()-1; i >=0; i--) {
+                Növény y = aa.get(i);
+                y.élet();
+                if (Objects.equals(y.n, "F")&&y.szint()>5) {
+                    System.out.println(" AAAA"+i+"  "+y.szint());
+                    a.add(new Av(19%y.szint()));
+                    a.add(y);
+                } else if (Objects.equals(y.n, "AV")&&y.fejl()>1) {
+                    //y.élet();
+                    a.add(new V());
+                } else {
+                    a.add(y);
+                }
+            }
+
+            al.clear();
+            Collections.reverse(a);
+            al.addAll(a);
+        }
+
+
+        return a;
     }
 
-    public void clearCanvas() {
-        mPath.reset();
+
+
+
+
+    private ArrayList<P> L(ArrayList<P> ss, int sm) {
+    F f = new F();
+    f.hossz();
+
+        ArrayList<P> sss = new ArrayList<>();
+        for (P x : ss) {
+
+            if (Objects.equals(x.n, "X")) {
+
+                if(sm>=ism/2){
+                    sss.add(new P("X",x.v,x.szg,x.t));
+                    sss.add(new P("[",0,0,0));
+                    sss.add(new P("L",x.v-(x.v*0.1f),x.szg,0));
+                    sss.add(new P("]",0,0,0));
+                }else if(sm<ism/2){
+                    sss.add(x);
+                    sss.add(new P("[",0,0,0));
+                    sss.add(new P("L",x.v-(x.v*0.1f),x.szg,0));
+                    sss.add(new P("]",0,0,0));
+                    sss.add(new P("[",0,0,0));
+                    sss.add(new P("L",x.v-(x.v*0.3f),x.szg+17,0));
+                    sss.add(new P("]",0,0,0));
+                    sss.add(new P("[",0,0,0));
+                    sss.add(new P("L",x.v-(x.v*0.1f),x.szg-17,0));
+                    sss.add(new P("]",0,0,0));
+
+                }
+
+
+
+
+
+            } else if (Objects.equals(x.n, "L")) {
+
+
+
+                    //sss.add(new P("L",x.szigmoid(ism),x.stochastic(x.szg + 6, x.szg - 6),0));
+
+                // sss.add(new P(x.n, x.v , x.stochastic(x.szg + 5, x.szg - 5)));
+
+
+            } else if(Objects.equals(x.n,"F")){
+                //sss.add(new P("X",x.v, x.stochastic(x.szg + 6, x.szg - 6),0));
+                sss.add(new P("F",x.v,x.szg,0));
+                sss.add(new P("F",x.v,x.szg,0));
+            }
+            else {
+                sss.add(x);
+            }
+        }
+        sm--;
+        if(sm!=0)
+            return L(sss,sm);
+        else
+            return sss;
+
+    }
+
+
+   @Override
+    public boolean onTouchEvent(MotionEvent event) {
+
+        return true;
+    }
+
+    public void nulláz(){
+        ism=1;
+        al.clear();
+        al.add(new F());
         invalidate();
     }
 
-    // when ACTION_UP stop touch
-    private void upTouch() {
 
-        mPath.lineTo(mX, mY);
 
-    }
 
-    //override the onTouchEvent
-   @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        float x = event.getX();
-        float y = event.getY();
+    public void T(Canvas c,ArrayList<Növény> a){
 
-        switch (event.getAction()) {
-            case MotionEvent.ACTION_DOWN:
+        Teknős t = new Teknős(c.getWidth()/2,c.getHeight()-200,90);
 
-                startTouch(x, y);
-                invalidate();
-                break;
-            case MotionEvent.ACTION_MOVE:
-                moveTouch(x, y);
-                invalidate();
-                break;
-            case MotionEvent.ACTION_UP:
-                upTouch();
-                invalidate();
-                break;
+
+
+
+        for (Növény ch : a) {
+
+            switch (ch.n) {
+                case "F":
+                case "X":
+                    c.rotate(ch.szög(), (float) t.x, (float) t.y);
+                    t.előreRajz(ch.vastagság(),-ch.hossz(), c, ch.szín(), ism);
+
+                    break;
+
+                case "L":
+                    if(ch.szint()<2) {
+                        c.rotate(ch.szög(), (float) t.x, (float) t.y);
+                        t.levElRajz(-ch.hossz(), c, ch.szín());
+                    }else if(ch.szint()==2){
+                        t.mentés(c, (int)t.x,(int)t.y,(int)delta_theta);
+                        c.rotate(ch.szög()-65, (float) t.x, (float) t.y);
+                        t.levElRajz(-ch.hossz()/3,c,ch.szín());
+                        t.betöltés(c);
+                        t.mentés(c, (int)t.x,(int)t.y,(int)delta_theta);
+                        c.rotate(ch.szög(), (float) t.x, (float) t.y);
+                        t.levElRajz(-ch.hossz(), c, ch.szín());
+                        t.betöltés(c);
+                        t.mentés(c, (int)t.x,(int)t.y,(int)delta_theta);
+                        c.rotate(ch.szög()+65, (float) t.x, (float) t.y);
+                        t.levElRajz(-ch.hossz()/3, c, ch.szín());
+                        t.betöltés(c);
+
+                    }else {
+                        t.mentés(c, (int)t.x,(int)t.y,(int)delta_theta);
+                        c.rotate(ch.szög()-130, (float) t.x, (float) t.y);
+                        t.levElRajz(-ch.hossz()/6,c,ch.szín());
+                        t.betöltés(c);
+                        t.mentés(c, (int)t.x,(int)t.y,(int)delta_theta);
+                        c.rotate(ch.szög()-65, (float) t.x, (float) t.y);
+                        t.levElRajz(-ch.hossz()/3, c, ch.szín());
+                        t.betöltés(c);
+                        t.mentés(c, (int)t.x,(int)t.y,(int)delta_theta);
+                        c.rotate(ch.szög(), (float) t.x, (float) t.y);
+                        t.levElRajz(-ch.hossz(), c, ch.szín());
+                        t.betöltés(c);
+                        t.mentés(c, (int)t.x,(int)t.y,(int)delta_theta);
+                        c.rotate(ch.szög()+65, (float) t.x, (float) t.y);
+                        t.levElRajz(-ch.hossz()/3,c,ch.szín());
+                        t.betöltés(c);
+                        t.mentés(c, (int)t.x,(int)t.y,(int)delta_theta);
+                        c.rotate(ch.szög()+130, (float) t.x, (float) t.y);
+                        t.levElRajz(-ch.hossz()/6, c, ch.szín());
+                        t.betöltés(c);
+                    }
+                    break;
+
+                case "V":
+                        t.mentés(c, (int)t.x,(int)t.y,(int)delta_theta);
+                        c.rotate(ch.szög(), (float) t.x, (float) t.y);
+                        t.virágzás(c,ch.szín());
+                        t.betöltés(c);
+                    break;
+                case "[":
+                    t.mentés(c, (int) t.x, (int) t.y, (int) delta_theta);
+                    break;
+                case "]":
+                    t.betöltés(c);
+                    break;
+            }
+
 
 
         }
-        return true;
     }
-private String kf(String s){
-    return s;
+
+
+
 }
-
-
-    }

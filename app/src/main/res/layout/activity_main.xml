@@ -20,7 +20,16 @@
     <Button android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/gmb"
-        android:layout_gravity="top|center"/>
+        android:layout_gravity="top|center"
+        android:onClick="cl"
+        android:text="Nulláz"/>
+
+    <SeekBar
+        android:id="@+id/sb"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:max="22" />
 
     <Button
         android:id="@+id/button1"
@@ -28,14 +37,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center"
         android:onClick="clearCanvas"
-        android:text="Clear Canvas" />
-    <ImageButton
-        android:id="@+id/Forward"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|start"
-        android:onClick="clearCanvas"
-         />
+        android:text="Indít" />
+
 
 
 </FrameLayout>
