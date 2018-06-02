@@ -7,8 +7,8 @@ package blacklinden.kanvasz.kor;
 public class Víz {
 
     static float cserépMéret;
-    static int hetiHányÖnt;
-    static float vízMennyiség;
+    static int hetiHányÖnt=2;
+    static float vízMennyiség=30;
 
 
     public Víz(){

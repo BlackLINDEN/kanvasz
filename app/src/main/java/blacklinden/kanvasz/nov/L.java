@@ -32,10 +32,11 @@ public class L extends Növény {
 
     @Override
     public void élet() {
-        ép++;
+        ép+=Kender.cukrozó(1);
         szín();
         szög();
         hossz();
+        Kender.fény+=fényFelvétel();
     }
 
     @Override
@@ -73,6 +74,10 @@ public class L extends Növény {
             p.setColor(Color.GREEN);
         }
         return p;
+    }
+
+    private float fényFelvétel(){
+        return Fény.watt*1000;
     }
 
     @Override

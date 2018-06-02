@@ -38,7 +38,7 @@ public class F extends Növény {
     @Override
     public void élet() {
 
-        ép++;
+        ép+=Kender.cukrozó(1);
         hossz();
         fejl();
     }

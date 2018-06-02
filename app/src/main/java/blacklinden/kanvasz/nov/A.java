@@ -8,14 +8,16 @@ import android.graphics.Paint;
 
 public class A extends Növény {
     private int szint;
+    private float ép;
     public A(int szint) {
         super("A");
         this.szint=szint+1;
+        ép=0;
     }
 
     @Override
     public void élet() {
-
+        ép+=Kender.cukrozó(1);
     }
 
     @Override
@@ -40,7 +42,7 @@ public class A extends Növény {
 
     @Override
     public float fejl() {
-        return szint;
+        return ép;
     }
 
     @Override

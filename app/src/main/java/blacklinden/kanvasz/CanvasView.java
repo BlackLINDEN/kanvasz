@@ -44,9 +44,7 @@ public class CanvasView extends View {
     private Path mPath;
     Context context;
     private Paint mPaint;
-    private float mX, mY;
-    private static final float TOLERANCE = 5;
-    float theta = 22.5f;
+
     float delta_theta=0f;
     public static int ism=1;
 
@@ -65,6 +63,14 @@ public class CanvasView extends View {
         //oo.run();
         F ff = new F();
         al.add(ff);
+        al.add(new M());
+        al.add(new L(true,1));
+        al.add(new T());
+        al.add(new M());
+        al.add(new T());
+        al.add(new M());
+        al.add(new L(false,1));
+        al.add(new T());
 
         // we set a new Path
         mPath = new Path();
@@ -140,7 +146,7 @@ public class CanvasView extends View {
             a.add(x);
             a.add(new A(x.szint()));
         }
-        else if(Objects.equals(x.n,"A")&&x.fejl()<500){
+        else if(Objects.equals(x.n,"A")&&x.szint()<500&&x.fejl()>5){
 
             //System.out.println("szint: "+x.szint());
             a.add(new M());
@@ -271,6 +277,14 @@ public class CanvasView extends View {
         ism=1;
         al.clear();
         al.add(new F());
+        al.add(new M());
+        al.add(new L(true,1));
+        al.add(new T());
+        al.add(new M());
+        al.add(new T());
+        al.add(new M());
+        al.add(new L(false,1));
+        al.add(new T());
         invalidate();
     }
 

@@ -7,7 +7,7 @@ package blacklinden.kanvasz.kor;
 public class Fény {
    public static float irány=-0.2f;
    private static int lux;
-   private static int watt=100;
+   public static int watt=100;
    private static float hőSötétben=25;
    private static int kelvin;
    private static float táv;

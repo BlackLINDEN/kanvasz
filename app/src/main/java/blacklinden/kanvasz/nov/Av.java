@@ -16,7 +16,7 @@ public class Av extends Növény {
 
     @Override
     public void élet() {
-        //ép++;
+        ép+=Kender.cukrozó(1);
         fejl();
     }
 

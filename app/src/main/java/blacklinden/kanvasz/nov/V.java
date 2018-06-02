@@ -26,7 +26,7 @@ public class V extends Növény {
 
     @Override
     public void élet() {
-        ép++;
+        ép+=Kender.cukrozó(1);
         szög();
     }
 
