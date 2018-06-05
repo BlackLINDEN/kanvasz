@@ -206,67 +206,6 @@ public class CanvasView extends View {
 
 
 
-
-
-    private ArrayList<P> L(ArrayList<P> ss, int sm) {
-    F f = new F();
-    f.hossz();
-
-        ArrayList<P> sss = new ArrayList<>();
-        for (P x : ss) {
-
-            if (Objects.equals(x.n, "X")) {
-
-                if(sm>=ism/2){
-                    sss.add(new P("X",x.v,x.szg,x.t));
-                    sss.add(new P("[",0,0,0));
-                    sss.add(new P("L",x.v-(x.v*0.1f),x.szg,0));
-                    sss.add(new P("]",0,0,0));
-                }else if(sm<ism/2){
-                    sss.add(x);
-                    sss.add(new P("[",0,0,0));
-                    sss.add(new P("L",x.v-(x.v*0.1f),x.szg,0));
-                    sss.add(new P("]",0,0,0));
-                    sss.add(new P("[",0,0,0));
-                    sss.add(new P("L",x.v-(x.v*0.3f),x.szg+17,0));
-                    sss.add(new P("]",0,0,0));
-                    sss.add(new P("[",0,0,0));
-                    sss.add(new P("L",x.v-(x.v*0.1f),x.szg-17,0));
-                    sss.add(new P("]",0,0,0));
-
-                }
-
-
-
-
-
-            } else if (Objects.equals(x.n, "L")) {
-
-
-
-                    //sss.add(new P("L",x.szigmoid(ism),x.stochastic(x.szg + 6, x.szg - 6),0));
-
-                // sss.add(new P(x.n, x.v , x.stochastic(x.szg + 5, x.szg - 5)));
-
-
-            } else if(Objects.equals(x.n,"F")){
-                //sss.add(new P("X",x.v, x.stochastic(x.szg + 6, x.szg - 6),0));
-                sss.add(new P("F",x.v,x.szg,0));
-                sss.add(new P("F",x.v,x.szg,0));
-            }
-            else {
-                sss.add(x);
-            }
-        }
-        sm--;
-        if(sm!=0)
-            return L(sss,sm);
-        else
-            return sss;
-
-    }
-
-
    @Override
     public boolean onTouchEvent(MotionEvent event) {
 

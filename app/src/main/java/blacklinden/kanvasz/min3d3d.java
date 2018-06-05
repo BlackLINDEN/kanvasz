@@ -16,9 +16,6 @@ public class min3d3d extends RendererActivity {
 
     private Object3dContainer faceObject3D;
 
-    /**
-     * Called when the activity is first created.
-     */
     @Override
     public void initScene() {
         scene.lights().add(new Light());
@@ -35,7 +32,7 @@ public class min3d3d extends RendererActivity {
         faceObject3D = myParser.getParsedObject();
         faceObject3D.position().x = faceObject3D.position().y = faceObject3D.position().z = 0;
         faceObject3D.scale().x = faceObject3D.scale().y = faceObject3D.scale().z = 0.5f;
-// Depending on the model you will need to change the scale
+// mértezni kell ha kell
         faceObject3D.scale().x = faceObject3D.scale().y = faceObject3D.scale().z = 0.5f;
 
         scene.addChild(faceObject3D);

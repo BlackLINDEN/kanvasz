@@ -15,7 +15,7 @@ public class DearKen extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dear_ken);
-         mySurfaceView = (GLSurfaceView) findViewById(R.id.my_surface_view);
+         mySurfaceView = findViewById(R.id.my_surface_view);
         mySurfaceView.setEGLContextClientVersion(2);
 
 
@@ -36,7 +36,7 @@ public class DearKen extends Activity {
             public void onDrawFrame(GL10 gl10) {
                 endR.draw();
             }
-            // More code goes here
+            // mór kód góz hír
         });
     }
 }
