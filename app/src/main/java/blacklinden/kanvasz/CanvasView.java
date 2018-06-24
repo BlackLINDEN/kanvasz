@@ -28,6 +28,7 @@ package blacklinden.kanvasz;
         import blacklinden.kanvasz.nov.A;
         import blacklinden.kanvasz.nov.Av;
         import blacklinden.kanvasz.nov.F;
+        import blacklinden.kanvasz.nov.Kender;
         import blacklinden.kanvasz.nov.L;
         import blacklinden.kanvasz.nov.M;
         import blacklinden.kanvasz.nov.Növény;
@@ -44,14 +45,9 @@ public class CanvasView extends View {
     private Path mPath;
     Context context;
     private Paint mPaint;
-
+    Canvas canvas;
     float delta_theta=0f;
     public static int ism=1;
-
-
-
-
-    String levél="f[[+++B][---B][++BB][--BB]BBB]r";
 
     ArrayList<Növény> al = new ArrayList<>();
 
@@ -60,6 +56,7 @@ public class CanvasView extends View {
         super(c, attrs);
         context = c;
 
+        new Kender();
         //oo.run();
         F ff = new F();
         al.add(ff);
@@ -74,8 +71,6 @@ public class CanvasView extends View {
 
         // we set a new Path
         mPath = new Path();
-
-
 
         // and we set a new Paint with the desired attributes
         mPaint = new Paint();
@@ -107,14 +102,12 @@ public class CanvasView extends View {
     @Override
     protected void onDraw(final Canvas canvas) {
         super.onDraw(canvas);
-
-       // teknős(canvas,r("XFF",ism), 100);
         T(canvas,al);
-        //teknős(canvas, Lrendszer("X", 6), 5);
+
 
 
     }
-    Handler handler = new Handler(Looper.getMainLooper());
+    Handler handler = new Handler(Looper.myLooper());
     Runnable oo = new Runnable() {
         @Override
         public void run() {
@@ -123,11 +116,12 @@ public class CanvasView extends View {
             if(ism==1000) {
                 handler.removeCallbacks(this);
 
+
             }
-            else {
+            else if(!Kender.Halott_e()){
                 ism();
                 A(al,ism);
-                handler.postDelayed(this, 100);
+                handler.postDelayed(this, 1000);
             }
         }
     };
@@ -141,6 +135,7 @@ public class CanvasView extends View {
 
         if(ism<800){
         for(Növény x:aa){
+        Kender.update();
         x.élet();
         if(Objects.equals(x.n, "F")&&x.fejl()==50){
             a.add(x);
@@ -181,6 +176,7 @@ public class CanvasView extends View {
             al.addAll(a);
         }else {
             for (int i = aa.size()-1; i >=0; i--) {
+                Kender.update();
                 Növény y = aa.get(i);
                 y.élet();
                 if (Objects.equals(y.n, "F")&&y.szint()>5) {

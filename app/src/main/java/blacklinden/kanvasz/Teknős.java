@@ -28,7 +28,7 @@ public class Teknős  {
 
 
 
-    public Teknős(double x0, double y0, double a0) {
+    Teknős(double x0, double y0, double a0) {
         x = x0;
         y = y0;
         angle = a0;
@@ -128,78 +128,7 @@ public class Teknős  {
         //System.out.println(sz+" stack t"+stack.peek().t+" x"+(x-stack.peek().x)+" y"+(stack.peek().y));
     }
 
-    public void teki(Canvas c,String s,int i,float theta, Paint mPaint){
 
-
-
-
-
-            for (char ch : s.toCharArray()) {
-
-                if (ch == 'F'||ch=='X') {
-                   // előreRajz(-i,c,mPaint);
-
-
-
-                } else if (ch == 'B') {
-                    előre(-i,c);
-                }
-
-                else if (ch == 'f') {
-                    mPaint.setColor(Color.GREEN);
-                    mPaint.setStrokeWidth(8f);
-                    mPaint.setStyle(Paint.Style.FILL_AND_STROKE);
-                    mPaint.setStrokeCap(Paint.Cap.ROUND);
-                }
-
-                else if (ch == 'r') {
-                    mPaint.setColor(Color.BLACK);
-                    mPaint.setStrokeWidth(4f);
-                    mPaint.setStyle(Paint.Style.STROKE);
-                }
-
-
-
-                else if (ch == '+') {
-
-                    c.rotate(-theta,(float)x,(float)y);
-
-
-
-                }
-
-                else if (ch == '$') {
-                    c.rotate(25,(float)x,(float)y);
-
-                }
-
-                else if (ch == '€') {
-                    c.rotate(-25,(float)x,(float)y);
-
-                }
-
-                else if (ch == '-') {
-
-                    c.rotate(theta,(float)x,
-                            (float)y);
-
-
-                }
-                else if (ch == '['){
-                    //c.save(Canvas.ALL_SAVE_FLAG);//
-                    mentés(c,(int)x,(int)y,(int)theta);
-
-
-                }
-
-                else if( ch == ']'){
-                    //c.restoreToCount(c.getSaveCount());
-                    betöltés(c);
-
-                }
-
-            }//c.drawPath(mPath, mPaint);
-        }
 
 
 

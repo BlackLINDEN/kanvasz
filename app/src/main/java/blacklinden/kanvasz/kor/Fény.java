@@ -7,12 +7,13 @@ package blacklinden.kanvasz.kor;
 public class Fény {
    public static float irány=-0.2f;
    private static int lux;
-   public static int watt=100;
+   public static int watt=500;
    private static float hőSötétben=25;
    private static int kelvin;
    private static float táv;
    private static String fajta;
    private static Égő égő;
+   private static final float wattVáltóSzám=0.00052656506684073f;
 
     public Fény(float irány,String fajta){
         Fény.irány =irány;
@@ -32,7 +33,7 @@ public class Fény {
 
     public static float hőmérséklet(){
 
-        return (hőSötétben+((watt*0.00052656506684073f)*égő.getHőszor_()));
+        return (hőSötétben+((watt*wattVáltóSzám)*égő.getHőszor_()));
     }
 
     public static void setIrány(float d){

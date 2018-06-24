@@ -12,6 +12,7 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import blacklinden.kanvasz.kor.Fény;
+import blacklinden.kanvasz.nov.Kender;
 
 public class MainActivity extends Activity {
 
@@ -56,7 +57,9 @@ public class MainActivity extends Activity {
     public void clearCanvas(View v) {
         customCanvas.oo.run();
     }
-    public void cl(View v) { customCanvas.nulláz();}
+    public void cl(View v) {
+        Kender.setRost(0);}
+
 
 
 

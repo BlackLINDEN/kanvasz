@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 
 import blacklinden.kanvasz.kor.Fény;
+import blacklinden.kanvasz.kor.Lég;
 
 /**
  * Created by Vitya on 2018. 04. 01..
@@ -37,6 +38,7 @@ public class L extends Növény {
         szög();
         hossz();
         Kender.fény+=fényFelvétel();
+        légz();
     }
 
     @Override
@@ -107,6 +109,7 @@ public class L extends Növény {
 
     @Override
     public float légz() {
+    Kender.CO2(10*szint);//(Lég.getCO2()*fényFelvétel())
         return 0;
     }
 
